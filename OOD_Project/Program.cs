@@ -48,7 +48,7 @@ namespace OOD_Project
             string json = JsonSerializer.Serialize(list, new JsonSerializerOptions { WriteIndented = true });
 
 
-            File.WriteAllText(OutputFilePath, json);
+            File.WriteAllText(OutputFilePath, json); 
 
             Console.WriteLine("done\n");
             Console.ReadLine();
