@@ -10,14 +10,14 @@ namespace OOD_Project
     {
         public string Type { get; set; } = "CA";
 
-        public int ID { get; set; }
+        public int Id { get; set; }
         public Single Weight { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
 
         public Cargo(int id, Single weight, string code, string description)
         {
-            ID = id;
+            Id = id;
             Weight = weight;
             Code = code;
             Description = description;

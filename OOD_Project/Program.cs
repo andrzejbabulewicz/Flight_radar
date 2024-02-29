@@ -14,10 +14,10 @@ namespace OOD_Project
             string InputFilePath = @"..\..\..\inputs\example_data.ftr";
             string OutputFilePath = @"..\..\..\outputs\output.json";
 
-            DataHandler data_Handler = new DataHandler();
+            DataHandler dataHandler = new DataHandler();
 
-            data_Handler.readData(InputFilePath);
-            data_Handler.serializeData(OutputFilePath);
+            dataHandler.ReadData(InputFilePath);
+            dataHandler.SerializeData(OutputFilePath);
         }
     }
 }

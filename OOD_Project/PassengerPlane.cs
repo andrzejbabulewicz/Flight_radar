@@ -9,8 +9,7 @@ namespace OOD_Project
     public class PassengerPlane
     {
         public string Type { get; set; } = "PP";
-
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Serial { get; set; }
         public string Country { get; set; }
         public string Model { get; set; }
@@ -21,7 +20,7 @@ namespace OOD_Project
         public PassengerPlane(int id, string serial, string country, string model, int firstClassSize,
             int businessClassSize, int economyClassSize)
         {
-            ID = id;
+            Id = id;
             Serial = serial;
             Country = country;
             Model = model;

@@ -9,32 +9,32 @@ namespace OOD_Project
     public class Flight
     {
         public string Type { get; set; } = "FL";
-        public int ID { get; set; }
-        public int OriginID { get; set; }
-        public int TargetID { get; set; }
+        public int Id { get; set; }
+        public int OriginId { get; set; }
+        public int TargetId { get; set; }
         public string TakeoffTime { get; set; }
         public string LandingTime { get; set; }
         public Single Longitude { get; set; }
         public Single Latitude { get; set; }
-        public Single AMSL { get; set; }
-        public int PlaneID { get; set; }
-        public int[] CrewID { get; set; }
-        public int[] LoadID { get; set; }
+        public Single Amsl { get; set; }
+        public int PlaneId { get; set; }
+        public int[] CrewId { get; set; }
+        public int[] LoadId { get; set; }
 
         public Flight(int iD, int originID, int targetID, string takeoffTime, string landingTime,
             Single longitude, Single latitude, Single aMSL, int planeID, int[] crewID, int[] loadID)
         {
-            ID = iD;
-            OriginID = originID;
-            TargetID = targetID;
+            Id = iD;
+            OriginId = originID;
+            TargetId = targetID;
             TakeoffTime = takeoffTime;
             LandingTime = landingTime;
             Longitude = longitude;
             Latitude = latitude;
-            AMSL = aMSL;
-            PlaneID = planeID;
-            CrewID = crewID;
-            LoadID = loadID;
+            Amsl = aMSL;
+            PlaneId = planeID;
+            CrewId = crewID;
+            LoadId = loadID;
         }
     }
 }

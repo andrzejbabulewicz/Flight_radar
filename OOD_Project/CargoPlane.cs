@@ -9,7 +9,7 @@ namespace OOD_Project
     public class CargoPlane
     {
         public string Type { get; set; } = "CP";
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Serial { get; set; }
         public string Country { get; set; }
         public string Model { get; set; }
@@ -17,7 +17,7 @@ namespace OOD_Project
 
         public CargoPlane(int iD, string serial, string country, string model, Single maxLoad)
         {
-            ID = iD;
+            Id = iD;
             Serial = serial;
             Country = country;
             Model = model;

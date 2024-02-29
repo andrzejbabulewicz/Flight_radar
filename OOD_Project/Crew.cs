@@ -9,7 +9,7 @@ namespace OOD_Project
     public class Crew
     {
         public string Type { get; set; } = "C";
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Phone { get; set; }
@@ -19,7 +19,7 @@ namespace OOD_Project
 
         public Crew(int iD, string name, int age, string phone, string email, int practice, string role)
         {
-            ID = iD;
+            Id = iD;
             Name = name;
             Age = age;
             Phone = phone;

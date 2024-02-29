@@ -10,7 +10,7 @@ namespace OOD_Project
     {
         public string Type { get; set; } = "P";
 
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Phone { get; set; }
@@ -20,7 +20,7 @@ namespace OOD_Project
 
         public Passenger(int iD, string name, int age, string phone, string email, string @class, int miles)
         {
-            ID = iD;
+            Id = iD;
             Name = name;
             Age = age;
             Phone = phone;

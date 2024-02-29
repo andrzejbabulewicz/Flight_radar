@@ -10,9 +10,9 @@ namespace OOD_Project
 {
     public class DataHandler
     {
-        public List<object> list = [];
+        public List<object> List = [];
 
-        public Dictionary<string, Func<string[], object>> shortcut = new()
+        public Dictionary<string, Func<string[], object>> Shortcuts = new()
         {
             ["C"] = CreateCrew,
             ["P"] = CreatePassenger,
@@ -23,32 +23,30 @@ namespace OOD_Project
             ["FL"] = CreateFlight
         };
 
-        public void readData(string input)
+        public void ReadData(string input)
         {
             List<string> data = new();
 
-
             data = File.ReadAllLines(input).ToList();
-
 
             foreach (var line in data)
             {
-                string[] entries = line.Split(',');
-                if (entries.Length > 0)
+                string[] Entries = line.Split(',');
+                if (Entries.Length > 0)
                 {
-                    string init = entries[0];
-                    if (this.shortcut.ContainsKey(init))
+                    string init = Entries[0];
+                    if (Shortcuts.ContainsKey(init))
                     {
-                        list.Add(shortcut[init](entries));
+                        List.Add(Shortcuts[init](Entries));
                     }
                 }
             }
         }
 
-        public void serializeData(string output)
+        public void SerializeData(string output)
         {
-            string json = JsonSerializer.Serialize(list, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(output, json);
+            string Json = JsonSerializer.Serialize(List, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(output, Json);
         }
 
         public static object CreateCrew(string[] data)
