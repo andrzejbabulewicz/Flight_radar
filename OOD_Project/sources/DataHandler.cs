@@ -11,7 +11,8 @@ namespace OOD_Project
 {
     public class DataHandler
     {
-        public List<object> List = [];
+        public List<Airport> airports { get; set; } = [];
+        public List<Flight> flights { get; set; } = [];
 
         public Dictionary<string, Func<string[], object>> Shortcuts = new()
         {
@@ -27,7 +28,7 @@ namespace OOD_Project
         public List<object> ReadData(List<string> Stringlist)
         {
             List<string> CopyList = new List<string>(Stringlist);
-            List<object> TempData = new();            
+            List<object> TempData = new();
 
             foreach(var line in CopyList)
             {
@@ -38,7 +39,16 @@ namespace OOD_Project
                     string init = Entries[0];
                     if (Shortcuts.ContainsKey(init))
                     {
-                        TempData.Add(Shortcuts[init](Entries));                       
+                        TempData.Add(Shortcuts[init](Entries));
+
+                        if(init == "AI")
+                        {
+                            airports.Add(Airport.CreateAirport(Entries));
+                        }
+                        if(init=="FL")
+                        {
+                            flights.Add(Flight.CreateFlight(Entries));
+                        }
                     }
                 }
             }

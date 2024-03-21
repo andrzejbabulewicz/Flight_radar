@@ -5,7 +5,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Unicode;
 using System.Threading.Tasks;
+using FlightTrackerGUI;
 using NetworkSourceSimulator;
+using OOD_Project.sources;
 
 namespace OOD_Project
 {
@@ -34,7 +36,8 @@ namespace OOD_Project
             Thread dataSourceThread = new Thread(networkSource.Run);
             dataSourceThread.Start();
 
-            MakeSnapshots(OutputFilePath);            
+            ShowPlanes showPlanes = new ShowPlanes(this);
+            //MakeSnapshots(OutputFilePath);            
         }
 
         public void NetworkSource_OnNewDataReady(object sender, NewDataReadyArgs e)
@@ -50,16 +53,23 @@ namespace OOD_Project
                     char[] ShortcutChars = reader.ReadChars(3);
                     UInt32 MessageLength = reader.ReadUInt32();
                     string ShortcutString = new string(ShortcutChars);
-                    if (ShortcutTypes.ContainsKey(ShortcutString))
+                    if(ShortcutTypes.ContainsKey(ShortcutString))
                     {
                         this.Data.Add(ShortcutTypes[ShortcutString](reader));
+                        if (ShortcutString == "NFL" || ShortcutString == "NAI")
+                        {
+                            List<string> copy = GetData();
+                            OnShortcutStringFound(new ShortcutStringEventArgs(copy));
+                        }
                     }
                 }
             }
+            
         }
 
         public void MakeSnapshots(string OutputFilePath)
-        {            
+        {
+            
             while (true)
             {
                 Console.WriteLine("print/exit:");
@@ -68,6 +78,7 @@ namespace OOD_Project
                 if (TerminalCommand == "print")
                 {
                     List<string> StringList = GetData();
+
                     DataHandler dataHandler = new();                    
                     List<object> ObjectList = dataHandler.ReadData(StringList);
                     string SnapPath = OutputFilePath;
@@ -87,6 +98,13 @@ namespace OOD_Project
         public List<string> GetData()
         {
             return this.Data;
+        }
+
+        public event EventHandler<ShortcutStringEventArgs> ShortcutStringFound;
+        public void OnShortcutStringFound(ShortcutStringEventArgs e)
+        {
+            EventHandler<ShortcutStringEventArgs> handler = ShortcutStringFound;
+            handler?.Invoke(this, e);
         }
 
     }

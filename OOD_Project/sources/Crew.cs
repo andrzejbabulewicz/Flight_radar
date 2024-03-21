@@ -30,6 +30,7 @@ namespace OOD_Project
 
         public static object CreateCrew(string[] data)
         {
+
             return new Crew(int.Parse(data[1]), data[2], int.Parse(data[3]), data[4], data[5], int.Parse(data[6]),
                 data[7]);
         }

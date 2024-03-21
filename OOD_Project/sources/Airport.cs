@@ -29,8 +29,9 @@ namespace OOD_Project
             Country = country;
         }
 
-        public static object CreateAirport(string[] data)
+        public static Airport CreateAirport(string[] data)
         {
+
             return new Airport(int.Parse(data[1]), data[2], data[3],
                 Single.Parse(data[4], CultureInfo.InvariantCulture),
                 Single.Parse(data[5], CultureInfo.InvariantCulture),

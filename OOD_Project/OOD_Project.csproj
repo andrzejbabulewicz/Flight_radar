@@ -18,6 +18,10 @@
     <Folder Include="outputs\snapshots\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FlightTrackerGUI" Version="1.0.0" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>
