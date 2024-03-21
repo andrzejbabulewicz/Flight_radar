@@ -83,7 +83,7 @@ namespace OOD_Project.sources
         {
             if(IsOvernight(flight))
             {
-                if(DateTime.Now>DateTime.Parse(flight.TakeoffTime) || DateTime.Now<DateTime.Parse(flight.LandingTime))
+                if(DateTime.Now>flight.TakeoffTime || DateTime.Now<flight.LandingTime)
                 {
                     return true;
                 }
@@ -93,7 +93,7 @@ namespace OOD_Project.sources
             }
             else
             {
-                if(DateTime.Now>DateTime.Parse(flight.TakeoffTime) && DateTime.Now<DateTime.Parse(flight.LandingTime))
+                if(DateTime.Now>flight.TakeoffTime && DateTime.Now<flight.LandingTime)
                 {
                     return true;
                 }
@@ -105,8 +105,8 @@ namespace OOD_Project.sources
 
         public static bool IsOvernight(Flight flight)
         {
-            DateTime takeoff = DateTime.Parse(flight.TakeoffTime);
-            DateTime landing = DateTime.Parse(flight.LandingTime);
+            DateTime takeoff = flight.TakeoffTime;
+            DateTime landing = flight.LandingTime;
             if (takeoff.Hour > landing.Hour)
             {
                 return true;
@@ -116,14 +116,16 @@ namespace OOD_Project.sources
 
         public void PrintFlightsFTR()
         {
+            this.FindFlightFTR();
             System.Timers.Timer timer = new System.Timers.Timer(1000);
             timer.Elapsed += (sender, e) =>
             {
-                this.FindFlightFTR();
+                
                 FlightsGUIData temp = new FlightsGUIData(this.LocateFlight());
                 Runner.UpdateGUI(temp);
             };
             timer.Start();
+
             Runner.Run();
         }
     }

@@ -15,8 +15,8 @@ namespace OOD_Project
         public UInt64 Id { get; set; }
         public int OriginId { get; set; }
         public int TargetId { get; set; }
-        public string TakeoffTime { get; set; }
-        public string LandingTime { get; set; }
+        public DateTime TakeoffTime { get; set; }
+        public DateTime LandingTime { get; set; }
         public float Longitude { get; set; }
         public float Latitude { get; set; }
         public float Amsl { get; set; }
@@ -24,7 +24,7 @@ namespace OOD_Project
         public int[] CrewId { get; set; }
         public int[] LoadId { get; set; }
 
-        public Flight(UInt64 iD, int originID, int targetID, string takeoffTime, string landingTime,
+        public Flight(UInt64 iD, int originID, int targetID, DateTime takeoffTime, DateTime landingTime,
             float longitude, float latitude, float aMSL, int planeID, int[] crewID, int[] loadID)
         {
             Id = iD;
@@ -44,7 +44,9 @@ namespace OOD_Project
         {
             int[] crewid = Array.ConvertAll(data[10].Trim('[', ']').Split(';'), int.Parse);
             int[] loadid = Array.ConvertAll(data[11].Trim('[', ']').Split(';'), int.Parse);
-            return new Flight(UInt64.Parse(data[1]), int.Parse(data[2]), int.Parse(data[3]), data[4], data[5],
+            return new Flight(UInt64.Parse(data[1]), int.Parse(data[2]), int.Parse(data[3]), 
+                DateTime.ParseExact(data[4], "HH:mm", CultureInfo.InvariantCulture),
+                DateTime.ParseExact(data[5], "HH:mm", CultureInfo.InvariantCulture),
                 float.Parse(data[6], CultureInfo.InvariantCulture),
                 float.Parse(data[7], CultureInfo.InvariantCulture),
                 float.Parse(data[8], CultureInfo.InvariantCulture), int.Parse(data[9]), crewid, loadid);
@@ -110,8 +112,8 @@ namespace OOD_Project
 
         public (double, double) GetCurrentPosition(DateTime current, Airport departureAirport, Airport arrivalAirport)
         {
-            DateTime takeoff=DateTime.ParseExact(TakeoffTime, "HH:mm", CultureInfo.InvariantCulture);
-            DateTime landing=DateTime.ParseExact(LandingTime, "HH:mm", CultureInfo.InvariantCulture);
+            DateTime takeoff = TakeoffTime;
+            DateTime landing = LandingTime;
 
             double flightTime = (landing>takeoff) ? (landing - takeoff).TotalHours : (landing - takeoff).TotalHours + 24;
             double timeFromStart = (takeoff<current) ? (current - takeoff).TotalHours : (current - takeoff).TotalHours + 24;
@@ -136,7 +138,8 @@ namespace OOD_Project
             
             double difx = x2 - x1;
             double dify = y2 - y1;
-            double angle =Math.Atan2(difx, dify);
+            double angle = Math.Atan2(difx, dify);
+            
             return angle;
         }
 

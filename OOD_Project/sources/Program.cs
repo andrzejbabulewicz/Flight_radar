@@ -43,7 +43,7 @@ namespace OOD_Project
 #if STAGE_3b
             //READING FROM STREAM
             NetworkDataHandler networkDataHandler = new();
-            networkDataHandler.ThreadHandler(FilePaths.InputFilePath, FilePaths.SnapshotOutputPath, 400, 800);
+            networkDataHandler.ThreadHandler(FilePaths.InputFilePath, FilePaths.SnapshotOutputPath, 200, 400);
             
             Runner.Run();
 #endif  
