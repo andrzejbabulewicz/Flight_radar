@@ -14,6 +14,10 @@ namespace OOD_Project
         public List<Airport> airports { get; set; } = [];
         public List<Flight> flights { get; set; } = [];
 
+        public List<PassengerPlane> passengerPlanes { get; set; } = [];
+
+        public List<CargoPlane> cargoPlanes { get; set; } = [];
+
         public Dictionary<string, Func<string[], object>> Shortcuts = new()
         {
             ["C"] = Crew.CreateCrew,
@@ -48,6 +52,14 @@ namespace OOD_Project
                         if(init=="FL")
                         {
                             flights.Add(Flight.CreateFlight(Entries));
+                        }
+                        if(init=="PP")
+                        {
+                            passengerPlanes.Add(PassengerPlane.CreatePassengerPlane(Entries));
+                        }
+                        if(init=="CP")
+                        {
+                            cargoPlanes.Add(CargoPlane.CreateCargoPlane(Entries));
                         }
                     }
                 }

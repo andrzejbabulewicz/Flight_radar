@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class PassengerPlane
+    public class PassengerPlane : IReportable
     {
         public string Type { get; set; } = "PP";
         public int Id { get; set; }
@@ -29,7 +29,7 @@ namespace OOD_Project
             EconomyClassSize = economyClassSize;
         }
 
-        public static object CreatePassengerPlane(string[] data)
+        public static PassengerPlane CreatePassengerPlane(string[] data)
         {
             return new PassengerPlane(int.Parse(data[1]), data[2], data[3], data[4], int.Parse(data[5]),
                 int.Parse(data[6]), int.Parse(data[7]));
@@ -56,6 +56,11 @@ namespace OOD_Project
             Output += reader.ReadUInt16().ToString();
 
             return Output;
+        }
+
+        public string Report(IMediable m)
+        {
+            return m.Report(this);
         }
     }
 }

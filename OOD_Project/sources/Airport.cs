@@ -4,10 +4,11 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OOD_Project.sources;
 
 namespace OOD_Project
 {
-    public class Airport
+    public class Airport : IReportable
     {
         public string Type { get; set; } = "AI";
         public int Id { get; set; }
@@ -61,6 +62,11 @@ namespace OOD_Project
             Output += new string(reader.ReadChars(3));
 
             return Output;
+        }
+
+       public string Report(IMediable m)
+        {
+            return m.Report(this);
         }
     }
 }

@@ -37,7 +37,8 @@ namespace OOD_Project
             dataSourceThread.Start();
 
             ShowPlanes showPlanes = new ShowPlanes(this);
-            //MakeSnapshots(OutputFilePath);            
+            
+            
         }
 
         public void NetworkSource_OnNewDataReady(object sender, NewDataReadyArgs e)
@@ -67,19 +68,18 @@ namespace OOD_Project
             
         }
 
-        public void MakeSnapshots(string OutputFilePath)
+        public void MakeSnapshots(string OutputFilePath, NewsGenerator newsGenerator)
         {
             
             while (true)
             {
-                Console.WriteLine("print/exit:");
                 string? TerminalCommand = Console.ReadLine();
 
                 if (TerminalCommand == "print")
                 {
                     List<string> StringList = GetData();
 
-                    DataHandler dataHandler = new();                    
+                    DataHandler dataHandler = new();
                     List<object> ObjectList = dataHandler.ReadData(StringList);
                     string SnapPath = OutputFilePath;
                     SnapPath += "snapshot_" + DateTime.Now.ToString("HH_mm_ss") + ".json";
@@ -88,6 +88,10 @@ namespace OOD_Project
                 else if (TerminalCommand == "exit")
                 {
                     Environment.Exit(0);
+                }
+                else if (TerminalCommand == "report")
+                {
+                    newsGenerator.GenerateNextNews();
                 }
                 else
                 {

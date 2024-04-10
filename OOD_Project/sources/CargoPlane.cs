@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class CargoPlane
+    public class CargoPlane : IReportable
     {
         public string Type { get; set; } = "CP";
         public int Id { get; set; }
@@ -25,7 +25,7 @@ namespace OOD_Project
             MaxLoad = maxLoad;
         }
 
-        public static object CreateCargoPlane(string[] data)
+        public static CargoPlane CreateCargoPlane(string[] data)
         {
             return new CargoPlane(int.Parse(data[1]), data[2], data[3], data[4],
                 float.Parse(data[5], CultureInfo.InvariantCulture));
@@ -48,6 +48,11 @@ namespace OOD_Project
             Output += reader.ReadSingle().ToString(CultureInfo.InvariantCulture);
 
             return Output;
+        }
+
+        public string Report(IMediable m)
+        {
+            return m.Report(this);
         }
     }
 }

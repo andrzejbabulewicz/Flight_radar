@@ -2,6 +2,7 @@
 //#define STAGE_2
 //#define STAGE_3a
 #define STAGE_3b
+#define STAGE_4
 
 using FlightTrackerGUI;
 using OOD_Project.sources;
@@ -35,6 +36,7 @@ namespace OOD_Project
 #if STAGE_3a
             
             //READING FORM FILE
+
             DataFlightHandler dataFlightHandler = new();
             dataFlightHandler.PrintFlightsFTR();
 
@@ -45,8 +47,30 @@ namespace OOD_Project
             NetworkDataHandler networkDataHandler = new();
             networkDataHandler.ThreadHandler(FilePaths.InputFilePath, FilePaths.SnapshotOutputPath, 200, 400);
             
+            
+            
+            
+#endif
+
+#if STAGE_4
+            //REPORTING TO NEWS
+            List<IMediable> media = new List<IMediable>{new Newspaper("Categories Journal"), new Newspaper("Polytechnical Gazette"),
+                new Television("Abelian Television"), new Television("Channel TV-Tensor"),
+                new Radio("Quantifier Radio"), new Radio("Shmem radio")};
+
+            List<IReportable> reports =
+            [
+                .. dataHandler.airports,
+                .. dataHandler.passengerPlanes,
+                .. dataHandler.cargoPlanes,
+            ];
+            NewsGenerator newsGenerator = new(media, reports);
+
+            Thread terminal = new Thread(() => networkDataHandler.MakeSnapshots(FilePaths.SnapshotOutputPath, newsGenerator));
+            terminal.Start();
+
             Runner.Run();
-#endif  
-        }        
+#endif
+        }
     }
 }
