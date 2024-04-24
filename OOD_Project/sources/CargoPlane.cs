@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class CargoPlane : IReportable
+    public class CargoPlane : AirportObjects, IReportable
     {
         public string Type { get; set; } = "CP";
-        public int Id { get; set; }
+       // public UInt64 Id { get; set; }
         public string Serial { get; set; }
         public string Country { get; set; }
         public string Model { get; set; }
         public float MaxLoad { get; set; }
 
-        public CargoPlane(int iD, string serial, string country, string model, float maxLoad)
+        public CargoPlane(UInt64 iD, string serial, string country, string model, float maxLoad)
         {
             Id = iD;
             Serial = serial;
@@ -27,7 +27,7 @@ namespace OOD_Project
 
         public static CargoPlane CreateCargoPlane(string[] data)
         {
-            return new CargoPlane(int.Parse(data[1]), data[2], data[3], data[4],
+            return new CargoPlane(UInt64.Parse(data[1]), data[2], data[3], data[4],
                 float.Parse(data[5], CultureInfo.InvariantCulture));
         }
 

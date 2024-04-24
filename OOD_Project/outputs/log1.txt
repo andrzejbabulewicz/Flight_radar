@@ -1,0 +1,74 @@
+ID Updated from 10 to 10
+ID Updated from 55 to 1631
+ID Updated from 340 to 2209
+ID Updated from 457 to 1236
+ID Updated from 506 to 2033
+ID Updated from 147 to 2401
+ID Updated from 574 to 1962
+ID Updated from 1070 to 1579
+ID Updated from 618 to 1158
+can't update the ID - no ID 1326 found!
+ID Updated from 104 to 1315
+can't update the ID - no ID 1472 found!
+can't update the ID - no ID 1392 found!
+can't update the ID - no ID 1481 found!
+ID Updated from 182 to 1005
+ID Updated from 29 to 2089
+can't update the ID - no ID 1485 found!
+ID Updated from 499 to 1329
+can't update the ID - no ID 1475 found!
+ID Updated from 171 to 2098
+ID Updated from 357 to 2203
+ID Updated from 358 to 1027
+can't update the ID - no ID 1347 found!
+ID Updated from 962 to 1527
+ID Updated from 627 to 1561
+ID Updated from 792 to 1234
+ID Updated from 650 to 2321
+can't update the ID - no ID 1431 found!
+ID Updated from 740 to 2215
+ID Updated from 475 to 1630
+position of 1073 updated:Longitude: -145,21829, Latitude: -87,924355, AMSL: 292,1136
+position of 1036 updated:Longitude: -115,52941, Latitude: -65,998566, AMSL: 7409,812
+position of 1103 updated:Longitude: -67,17546, Latitude: -59,330032, AMSL: 3202,3145
+position of 1088 updated:Longitude: 48,47077, Latitude: 27,736376, AMSL: 9320,949
+position of 1000 updated:Longitude: 15,235422, Latitude: 53,14479, AMSL: 9944,197
+position of 1175 updated:Longitude: -55,384537, Latitude: 87,035736, AMSL: 2779,9148
+position of 1008 updated:Longitude: 96,664536, Latitude: 56,606426, AMSL: 457,798
+position of 1013 updated:Longitude: -146,93097, Latitude: 54,21434, AMSL: 7967,9062
+position of 984 updated:Longitude: -171,53268, Latitude: -73,83688, AMSL: 4522,8696
+position of 1143 updated:Longitude: -5,95481, Latitude: -6,869265, AMSL: 9238,392
+position of 980 updated:Longitude: -82,12707, Latitude: 1,479755, AMSL: 444,67447
+position of 1019 updated:Longitude: -18,238646, Latitude: 63,14051, AMSL: 5672,0625
+position of 321 updated:Longitude: -88,412056, Latitude: 52,66626, AMSL: 4829,2036
+position of 1073 updated:Longitude: -108,147354, Latitude: 27,09598, AMSL: 3119,7957
+position of 1036 updated:Longitude: -103,43464, Latitude: 60,96732, AMSL: 4672,3745
+position of 1103 updated:Longitude: -161,88493, Latitude: -79,42511, AMSL: 777,99915
+position of 1088 updated:Longitude: -140,51558, Latitude: 81,17543, AMSL: 7980,634
+position of 1000 updated:Longitude: -133,23634, Latitude: -13,053079, AMSL: 6928,403
+position of 1175 updated:Longitude: 148,0308, Latitude: -66,756035, AMSL: 5280,3286
+position of 1008 updated:Longitude: -54,132835, Latitude: -10,536424, AMSL: 2296,8306
+position of 1013 updated:Longitude: 33,84093, Latitude: 81,83095, AMSL: 676,9015
+position of 984 updated:Longitude: 20,370777, Latitude: -67,73591, AMSL: 2567,2583
+position of 1143 updated:Longitude: -0,749077, Latitude: 20,052593, AMSL: 7839,941
+position of 980 updated:Longitude: 139,57149, Latitude: 63,623093, AMSL: 276,91754
+position of 1019 updated:Longitude: 97,861275, Latitude: -53,845642, AMSL: 3756,995
+position of 321 updated:Longitude: 42,76121, Latitude: 77,60325, AMSL: 7635,9663
+position of 1073 updated:Longitude: 47,96795, Latitude: -5,012481, AMSL: 5423,5605
+position of 1036 updated:Longitude: -24,074, Latitude: -12,826984, AMSL: 6723,151
+position of 1103 updated:Longitude: -108,28665, Latitude: -70,61774, AMSL: 2954,6252
+position of 1088 updated:Longitude: -169,05829, Latitude: -8,535289, AMSL: 1039,7069
+position of 1000 updated:Longitude: 140,71909, Latitude: -83,64768, AMSL: 1392,2837
+position of 1175 updated:Longitude: 155,66397, Latitude: 13,467536, AMSL: 4464,936
+position of 1008 updated:Longitude: 13,895434, Latitude: -63,151962, AMSL: 6397,2964
+position of 1013 updated:Longitude: 32,557625, Latitude: 2,161791, AMSL: 2058,9192
+position of 984 updated:Longitude: 35,00642, Latitude: -27,659632, AMSL: 92,23284
+position of 1143 updated:Longitude: -149,48839, Latitude: 20,7811, AMSL: 2120,0967
+position of 980 updated:Longitude: -56,339127, Latitude: 42,637367, AMSL: 9883,734
+position of 1019 updated:Longitude: -4,987317, Latitude: 21,58896, AMSL: 9201,4375
+contact info  of 234 updated: Phone: 382-227-2487, email: hjghjchbxjgb@abilitys.site
+contact info  of 102 updated: Phone: 383-287-1506, email: nebolondicsal@nguyenvuquocanh.com
+contact info  of 265 updated: Phone: 320-401-1385, email: nekropolis@becknellsbakery.com
+contact info  of 156 updated: Phone: 153-734-8335, email: vicay2006@ebarg.net
+contact info  of 163 updated: Phone: 633-644-7562, email: judsuss@naverly.com
+contact info  of 264 updated: Phone: 505-331-4035, email: gr8find@abilitys.site

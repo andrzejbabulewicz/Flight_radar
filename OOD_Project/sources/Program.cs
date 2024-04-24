@@ -1,7 +1,7 @@
 ﻿#define STAGE_1
 //#define STAGE_2
-//#define STAGE_3a
-#define STAGE_3b
+#define STAGE_3a
+//#define STAGE_3b
 #define STAGE_4
 
 using FlightTrackerGUI;
@@ -19,8 +19,9 @@ namespace OOD_Project
 #if STAGE_1
 
             DataHandler dataHandler = new();
+            
             List<string> Records = dataHandler.ConvertFileToList(FilePaths.InputFilePath);
-            List<object> ListedObjects = dataHandler.ReadData(Records);
+            List<AirportObjects> ListedObjects = dataHandler.ReadData(Records);
             dataHandler.SerializeData(ListedObjects, FilePaths.OutputFilePath);
 #endif
             //STAGE 2
@@ -38,22 +39,20 @@ namespace OOD_Project
             //READING FORM FILE
 
             DataFlightHandler dataFlightHandler = new();
-            dataFlightHandler.PrintFlightsFTR();
+            dataFlightHandler.PrintFlightsFTR(dataHandler);
 
 #endif
 
 #if STAGE_3b
             //READING FROM STREAM
             NetworkDataHandler networkDataHandler = new();
-            networkDataHandler.ThreadHandler(FilePaths.InputFilePath, FilePaths.SnapshotOutputPath, 200, 400);
-            
-            
-            
+            networkDataHandler.ThreadHandler(FilePaths.NewInputFilePath, 2, 4);
             
 #endif
 
 #if STAGE_4
             //REPORTING TO NEWS
+            
             List<IMediable> media = new List<IMediable>{new Newspaper("Categories Journal"), new Newspaper("Polytechnical Gazette"),
                 new Television("Abelian Television"), new Television("Channel TV-Tensor"),
                 new Radio("Quantifier Radio"), new Radio("Shmem radio")};
@@ -66,8 +65,13 @@ namespace OOD_Project
             ];
             NewsGenerator newsGenerator = new(media, reports);
 
+            NetworkDataHandler networkDataHandler = new(dataHandler);
+
             Thread terminal = new Thread(() => networkDataHandler.MakeSnapshots(FilePaths.SnapshotOutputPath, newsGenerator));
             terminal.Start();
+
+            networkDataHandler.airportObjects = ListedObjects;
+            networkDataHandler.ThreadHandler(FilePaths.NewInputFilePath, 800, 900);
 
             Runner.Run();
 #endif

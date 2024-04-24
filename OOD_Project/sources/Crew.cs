@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class Crew
+    public class Crew : AirportObjects
     {
         public string Type { get; set; } = "C";
-        public int Id { get; set; }
+        //public UInt64 Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Phone { get; set; }
@@ -17,7 +17,7 @@ namespace OOD_Project
         public int Practice { get; set; }
         public string Role { get; set; }
 
-        public Crew(int iD, string name, int age, string phone, string email, int practice, string role)
+        public Crew(UInt64 iD, string name, int age, string phone, string email, int practice, string role)
         {
             Id = iD;
             Name = name;
@@ -28,10 +28,10 @@ namespace OOD_Project
             Role = role;
         }
 
-        public static object CreateCrew(string[] data)
+        public static Crew CreateCrew(string[] data)
         {
 
-            return new Crew(int.Parse(data[1]), data[2], int.Parse(data[3]), data[4], data[5], int.Parse(data[6]),
+            return new Crew(UInt64.Parse(data[1]), data[2], int.Parse(data[3]), data[4], data[5], int.Parse(data[6]),
                 data[7]);
         }
 

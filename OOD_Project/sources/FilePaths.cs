@@ -11,5 +11,7 @@ namespace OOD_Project.sources
         public static readonly string InputFilePath = @"..\..\..\inputs\example_data.ftr";
         public static readonly string OutputFilePath = @"..\..\..\outputs\output.json";
         public static readonly string SnapshotOutputPath = @"..\..\..\outputs\snapshots\";
+        public static readonly string NewInputFilePath = @"..\..\..\inputs\example.ftre";
+        public static readonly string LogFilePath = @"..\..\..\outputs\log1.txt";
     }
 }

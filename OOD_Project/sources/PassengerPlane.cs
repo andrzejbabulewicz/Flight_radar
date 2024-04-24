@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class PassengerPlane : IReportable
+    public class PassengerPlane : AirportObjects, IReportable
     {
         public string Type { get; set; } = "PP";
-        public int Id { get; set; }
+        //public UInt64 Id { get; set; }
         public string Serial { get; set; }
         public string Country { get; set; }
         public string Model { get; set; }
@@ -17,7 +17,7 @@ namespace OOD_Project
         public int BusinessClassSize { get; set; }
         public int EconomyClassSize { get; set; }
 
-        public PassengerPlane(int id, string serial, string country, string model, int firstClassSize,
+        public PassengerPlane(UInt64 id, string serial, string country, string model, int firstClassSize,
             int businessClassSize, int economyClassSize)
         {
             Id = id;
@@ -31,7 +31,7 @@ namespace OOD_Project
 
         public static PassengerPlane CreatePassengerPlane(string[] data)
         {
-            return new PassengerPlane(int.Parse(data[1]), data[2], data[3], data[4], int.Parse(data[5]),
+            return new PassengerPlane(UInt64.Parse(data[1]), data[2], data[3], data[4], int.Parse(data[5]),
                 int.Parse(data[6]), int.Parse(data[7]));
         }
 

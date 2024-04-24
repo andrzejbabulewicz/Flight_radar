@@ -9,22 +9,22 @@ using Mapsui.Projections;
 
 namespace OOD_Project
 {
-    public class Flight
+    public class Flight : AirportObjects
     {
         public string Type { get; set; } = "FL";
-        public UInt64 Id { get; set; }
-        public int OriginId { get; set; }
-        public int TargetId { get; set; }
+        //public UInt64 Id { get; set; }
+        public UInt64 OriginId { get; set; }
+        public UInt64 TargetId { get; set; }
         public DateTime TakeoffTime { get; set; }
         public DateTime LandingTime { get; set; }
-        public float Longitude { get; set; }
-        public float Latitude { get; set; }
+        //public float Longitude { get; set; }
+        //public float Latitude { get; set; }
         public float Amsl { get; set; }
         public int PlaneId { get; set; }
         public int[] CrewId { get; set; }
         public int[] LoadId { get; set; }
 
-        public Flight(UInt64 iD, int originID, int targetID, DateTime takeoffTime, DateTime landingTime,
+        public Flight(UInt64 iD, UInt64 originID, UInt64 targetID, DateTime takeoffTime, DateTime landingTime,
             float longitude, float latitude, float aMSL, int planeID, int[] crewID, int[] loadID)
         {
             Id = iD;
@@ -44,7 +44,7 @@ namespace OOD_Project
         {
             int[] crewid = Array.ConvertAll(data[10].Trim('[', ']').Split(';'), int.Parse);
             int[] loadid = Array.ConvertAll(data[11].Trim('[', ']').Split(';'), int.Parse);
-            return new Flight(UInt64.Parse(data[1]), int.Parse(data[2]), int.Parse(data[3]), 
+            return new Flight(UInt64.Parse(data[1]), UInt64.Parse(data[2]), UInt64.Parse(data[3]), 
                 DateTime.ParseExact(data[4], "HH:mm", CultureInfo.InvariantCulture),
                 DateTime.ParseExact(data[5], "HH:mm", CultureInfo.InvariantCulture),
                 float.Parse(data[6], CultureInfo.InvariantCulture),
@@ -110,7 +110,7 @@ namespace OOD_Project
             return Output;
         }
 
-        public (double, double) GetCurrentPosition(DateTime current, Airport departureAirport, Airport arrivalAirport)
+        public (double, double) GetCurrentPosition(DateTime current, Airport arrivalAirport)
         {
             DateTime takeoff = TakeoffTime;
             DateTime landing = LandingTime;
@@ -120,9 +120,9 @@ namespace OOD_Project
 
             double progress= timeFromStart / flightTime;
 
-            double longitude = CalculatePosition(departureAirport.Longitude, arrivalAirport.Longitude, progress);
-            double latitude = CalculatePosition(departureAirport.Latitude, arrivalAirport.Latitude, progress);
-
+            double longitude = CalculatePosition(this.Longitude, arrivalAirport.Longitude, progress);
+            double latitude = CalculatePosition(this.Latitude, arrivalAirport.Latitude, progress);        
+   
             return (longitude, latitude);
         }
 
@@ -131,9 +131,9 @@ namespace OOD_Project
             return start + ((end - start) * progress);
         }
 
-        public double GetAngle(Airport departureAirport, Airport arrivalAirport)
+        public double GetAngle(Airport arrivalAirport)
         {
-            (double x1, double y1) = SphericalMercator.FromLonLat(departureAirport.Longitude, departureAirport.Latitude);
+            (double x1, double y1) = SphericalMercator.FromLonLat(this.Longitude, this.Latitude);
             (double x2, double y2) = SphericalMercator.FromLonLat(arrivalAirport.Longitude, arrivalAirport.Latitude);
             
             double difx = x2 - x1;

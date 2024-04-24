@@ -8,18 +8,18 @@ using OOD_Project.sources;
 
 namespace OOD_Project
 {
-    public class Airport : IReportable
+    public class Airport : AirportObjects, IReportable
     {
         public string Type { get; set; } = "AI";
-        public int Id { get; set; }
+        //public UInt64 Id { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
-        public Single Longitude { get; set; }
-        public Single Latitude { get; set; }
+        //public Single Longitude { get; set; }
+        //public Single Latitude { get; set; }
         public Single Amsl { get; set; }
         public string Country { get; set; }
 
-        public Airport(int id, string name, string code, Single longitude, Single latitude, Single aMSL, string country)
+        public Airport(UInt64 id, string name, string code, Single longitude, Single latitude, Single aMSL, string country)
         {
             Id = id;
             Name = name;
@@ -33,7 +33,7 @@ namespace OOD_Project
         public static Airport CreateAirport(string[] data)
         {
 
-            return new Airport(int.Parse(data[1]), data[2], data[3],
+            return new Airport(UInt64.Parse(data[1]), data[2], data[3],
                 Single.Parse(data[4], CultureInfo.InvariantCulture),
                 Single.Parse(data[5], CultureInfo.InvariantCulture),
                 Single.Parse(data[6], CultureInfo.InvariantCulture),

@@ -29,7 +29,9 @@ namespace OOD_Project
                 Console.WriteLine("No more data to report!");
             }
 
-            CalculateNext();           
+            CalculateNext();   
+            
+
         }        
         public bool IsNewsAvailable()
         {

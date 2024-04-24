@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    internal class Cargo
+    internal class Cargo : AirportObjects
     {
         public string Type { get; set; } = "CA";
-        public int Id { get; set; }
+        //public UInt64 Id { get; set; }
         public float Weight { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
 
-        public Cargo(int id, float weight, string code, string description)
+        public Cargo(UInt64 id, float weight, string code, string description)
         {
             Id = id;
             Weight = weight;
@@ -23,9 +23,9 @@ namespace OOD_Project
             Description = description;
         }
 
-        public static object CreateCargo(string[] data)
+        public static Cargo CreateCargo(string[] data)
         {
-            return new Cargo(int.Parse(data[1]), float.Parse(data[2], CultureInfo.InvariantCulture), data[3], data[4]);
+            return new Cargo(UInt64.Parse(data[1]), float.Parse(data[2], CultureInfo.InvariantCulture), data[3], data[4]);
         }
 
         public static string CreateStringCargo(System.IO.BinaryReader reader)

@@ -15,6 +15,8 @@ namespace OOD_Project
     {
         public static string OutputPath = @"..\..\..\outputs\testing.txt";
         public List<string> Data { get; set; } = [];
+        public List<AirportObjects> airportObjects { get; set; } = [];
+        public DataHandler dataHandler { get; set; } 
 
         public Dictionary<string, Func<BinaryReader, string>> ShortcutTypes= new()
         {
@@ -27,12 +29,20 @@ namespace OOD_Project
             ["NFL"] = Flight.CreateStringFlight
         };
 
-        public void ThreadHandler(string InputFilePath, string OutputFilePath, int minDelay, int maxDelay)
+        public NetworkDataHandler(DataHandler dataHandler)
+        {
+            this.dataHandler = dataHandler;
+        }
+        public void ThreadHandler(string InputFilePath, int minDelay, int maxDelay)
         {
             NetworkSourceSimulator.NetworkSourceSimulator networkSource = 
                 new NetworkSourceSimulator.NetworkSourceSimulator(InputFilePath, minDelay, maxDelay);
 
             networkSource.OnNewDataReady += this.NetworkSource_OnNewDataReady;
+            networkSource.OnIDUpdate += this.NetworkSource_OnIDUpdate;
+            networkSource.OnPositionUpdate += this.NetworkSource_OnPositionUpdate;
+            networkSource.OnContactInfoUpdate += this.NetworkSource_OnContactInfoUpdate;
+
             Thread dataSourceThread = new Thread(networkSource.Run);
             dataSourceThread.Start();
 
@@ -41,6 +51,65 @@ namespace OOD_Project
             
         }
 
+        public void NetworkSource_OnContactInfoUpdate(object sender, ContactInfoUpdateArgs e)
+        {
+            
+            if (airportObjects.Find(x => x.Id == e.ObjectID) == null)
+            {
+                WriteToFile($"can't change the contact info - no ID {e.ObjectID} found!");
+            }
+            else
+            {
+                int index = airportObjects.FindIndex(x => x.Id == e.ObjectID);
+                airportObjects[index].Phone = e.PhoneNumber;
+                airportObjects[index].Email = e.EmailAddress;
+                WriteToFile($"contact info  of {airportObjects[index].Id} updated: " +
+                    $"Phone: {e.PhoneNumber}, email: {e.EmailAddress}");
+            }
+        }
+        public void NetworkSource_OnPositionUpdate(object sender, PositionUpdateArgs e)
+        {
+            DataFlightHandler dataFlightHandler = new();
+            if(airportObjects.Find(x => x.Id == e.ObjectID)==null)
+            //if (obj == null)
+            {
+                WriteToFile($"can't change the position - no ID {e.ObjectID} found!");
+            }
+            else
+            {
+                int index = airportObjects.FindIndex(x => x.Id == e.ObjectID);
+                
+                int flightIndex = dataHandler.flights.FindIndex(x => x.Id == e.ObjectID);
+                if(flightIndex >= 0)
+                {
+                    dataHandler.flights[flightIndex].Longitude = e.Longitude;
+                    dataHandler.flights[flightIndex].Latitude = e.Latitude;
+                    dataHandler.flights[flightIndex].AMSL = e.AMSL;
+                    dataFlightHandler.PrintFlightsFTR(dataHandler);
+
+                }
+
+
+                WriteToFile($"position of {airportObjects[index].Id} updated:" +
+                    $"Longitude: {e.Longitude}, Latitude: {e.Latitude}, AMSL: {e.AMSL}");
+            }           
+        }
+        public void NetworkSource_OnIDUpdate(object sender, IDUpdateArgs e)
+        {
+            
+            if(airportObjects.Find(x => x.Id == e.ObjectID) == null)
+            {
+                WriteToFile($"can't update the ID - no ID {e.ObjectID} found!");
+            }
+            else
+            {                
+                int index = airportObjects.FindIndex(x => x.Id == e.ObjectID);
+                ulong oldId = airportObjects[index].Id;
+                airportObjects[index].Id = e.NewObjectID;
+                WriteToFile($"ID Updated from {oldId} to {airportObjects[index].Id}");
+            }
+           
+        }
         public void NetworkSource_OnNewDataReady(object sender, NewDataReadyArgs e)
         { 
             Message message = ((NetworkSourceSimulator.NetworkSourceSimulator)sender).GetMessageAt(e.MessageIndex);
@@ -64,8 +133,7 @@ namespace OOD_Project
                         }
                     }
                 }
-            }
-            
+            }            
         }
 
         public void MakeSnapshots(string OutputFilePath, NewsGenerator newsGenerator)
@@ -80,7 +148,7 @@ namespace OOD_Project
                     List<string> StringList = GetData();
 
                     DataHandler dataHandler = new();
-                    List<object> ObjectList = dataHandler.ReadData(StringList);
+                    List<AirportObjects> ObjectList = dataHandler.ReadData(StringList);
                     string SnapPath = OutputFilePath;
                     SnapPath += "snapshot_" + DateTime.Now.ToString("HH_mm_ss") + ".json";
                     dataHandler.SerializeData(ObjectList, SnapPath);
@@ -111,5 +179,19 @@ namespace OOD_Project
             handler?.Invoke(this, e);
         }
 
+        private void WriteToFile(string text)
+        {
+            string path = FilePaths.LogFilePath;
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(text);
+            }
+
+        }
+
+
     }
+
+
 }
+

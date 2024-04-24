@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOD_Project
 {
-    public class Passenger
+    public class Passenger : AirportObjects
     {
         public string Type { get; set; } = "P";
-        public int Id { get; set; }
+        //public UInt64 Id { get; set; }
         public string Name { get; set; }
         public int Age { get; set; }
         public string Phone { get; set; }
@@ -17,7 +17,7 @@ namespace OOD_Project
         public string Class { get; set; }
         public int Miles { get; set; }
 
-        public Passenger(int iD, string name, int age, string phone, string email, string @class, int miles)
+        public Passenger(UInt64 iD, string name, int age, string phone, string email, string @class, int miles)
         {
             Id = iD;
             Name = name;
@@ -28,9 +28,9 @@ namespace OOD_Project
             Miles = miles;
         }
 
-        public static object CreatePassenger(string[] data)
+        public static Passenger CreatePassenger(string[] data)
         {
-            return new Passenger(int.Parse(data[1]), data[2], int.Parse(data[3]), data[4], data[5], data[6],
+            return new Passenger(UInt64.Parse(data[1]), data[2], int.Parse(data[3]), data[4], data[5], data[6],
                 int.Parse(data[7]));
         }
 

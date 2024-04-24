@@ -18,7 +18,7 @@ namespace OOD_Project
 
         public List<CargoPlane> cargoPlanes { get; set; } = [];
 
-        public Dictionary<string, Func<string[], object>> Shortcuts = new()
+        public Dictionary<string, Func<string[], AirportObjects>> Shortcuts = new()
         {
             ["C"] = Crew.CreateCrew,
             ["P"] = Passenger.CreatePassenger,
@@ -29,10 +29,10 @@ namespace OOD_Project
             ["FL"] = Flight.CreateFlight
         };
 
-        public List<object> ReadData(List<string> Stringlist)
+        public List<AirportObjects> ReadData(List<string> Stringlist)
         {
             List<string> CopyList = new List<string>(Stringlist);
-            List<object> TempData = new();
+            List<AirportObjects> TempData = new();
 
             foreach(var line in CopyList)
             {
@@ -68,7 +68,7 @@ namespace OOD_Project
             return TempData;
         }
 
-        public void SerializeData(List<object> List, string OutputPath)
+        public void SerializeData(List<AirportObjects> List, string OutputPath)
         {
             string Json = JsonSerializer.Serialize(List, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(OutputPath, Json);

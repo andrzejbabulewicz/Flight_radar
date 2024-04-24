@@ -17,4 +17,14 @@ namespace OOD_Project
         string Report(CargoPlane cargoPlane);
         string Report(PassengerPlane passengerPlane);
     }
+
+    public abstract class AirportObjects
+    {
+        public UInt64 Id;
+        public double Longitude;
+        public double Latitude;
+        public Single AMSL;
+        public string? Phone;
+        public string? Email;
+    }
 }

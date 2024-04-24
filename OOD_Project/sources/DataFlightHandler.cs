@@ -14,11 +14,10 @@ namespace OOD_Project.sources
         public List<Airport> airports { get; set; } = [];
         public List<Flight> flights { get; set; } = [];
 
-        public void FindFlightFTR()
-        {
-            DataHandler dataHandler = new();
-            List<string> Records = dataHandler.ConvertFileToList(FilePaths.InputFilePath);
-            dataHandler.ReadData(Records);
+        public void FindFlightFTR(DataHandler dataHandler)
+        {            
+            //List<string> Records = dataHandler.ConvertFileToList(FilePaths.InputFilePath);
+            //dataHandler.ReadData(Records);
 
             airports = dataHandler.airports;
             flights = dataHandler.flights;
@@ -43,20 +42,18 @@ namespace OOD_Project.sources
             double y = 0;
             foreach (var flight in flights)
             {
-                int departure = flight.OriginId;
-                int arrival = flight.TargetId;
+                //UInt64 departure = flight.OriginId;
+                UInt64 arrival = flight.TargetId;
 
-                Airport departureAirport = null;
+                //Airport departureAirport = null;
                 Airport arrivalAirport = null;
 
                 foreach (var airport in airports)
                 {
-
-
-                    if (airport.Id == departure)
-                    {
-                        departureAirport = airport;
-                    }
+                    //if (airport.Id == departure)
+                    //{
+                    //    departureAirport = airport;
+                    //}
                     if (airport.Id == arrival)
                     {
                         arrivalAirport = airport;
@@ -64,13 +61,13 @@ namespace OOD_Project.sources
                 }
                 if(ShouldBeDisplayed(flight))
                 {
-                    (x, y) = flight.GetCurrentPosition(DateTime.Now, departureAirport, arrivalAirport);
+                    (x, y) = flight.GetCurrentPosition(DateTime.Now, arrivalAirport);
                     WorldPosition worldPosition = new WorldPosition(y, x);
                     FlightGUI flightGUIData = new()
                     {
                         ID = flight.Id,
                         WorldPosition = worldPosition,
-                        MapCoordRotation = flight.GetAngle(departureAirport, arrivalAirport)
+                        MapCoordRotation = flight.GetAngle(arrivalAirport)
                     };
                     flightGUI.Add(flightGUIData);
                 }
@@ -114,19 +111,17 @@ namespace OOD_Project.sources
             return false;
         }
 
-        public void PrintFlightsFTR()
+        public void PrintFlightsFTR(DataHandler dataHandler)
         {
-            this.FindFlightFTR();
+            this.FindFlightFTR(dataHandler);
             System.Timers.Timer timer = new System.Timers.Timer(1000);
             timer.Elapsed += (sender, e) =>
-            {
-                
+            {                
                 FlightsGUIData temp = new FlightsGUIData(this.LocateFlight());
                 Runner.UpdateGUI(temp);
             };
             timer.Start();
 
-            Runner.Run();
         }
     }
 }
